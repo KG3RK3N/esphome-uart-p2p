@@ -1,0 +1,35 @@
+external_components:
+  - source:
+      url: github://KG3RK3N/esphome-uart-p2p
+      type: git
+    components: [uart_p2p_receiver]
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+  
+uart:
+  id: uart_1
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 115200
+
+uart_p2p_receiver:
+  uart_id: uart_1
+  sensors:
+    - id: random_sensor_1
+      name: "Sensor address 0x01"
+      unit_of_measurement: "%"
+      address: 0x01
+  binary_sensors:
+    - id: binary_sensor_1
+      name: "Binary sensor address 0x02"
+      address: 0x02
+  text_sensors:
+    - id: text_sensor_1
+      name: "Text sensor address 0x03"
+      address: 0x03
+

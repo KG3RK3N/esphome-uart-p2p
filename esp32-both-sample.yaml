@@ -1,0 +1,79 @@
+external_components:
+  - source:
+      url: github://KG3RK3N/esphome-uart-p2p
+      type: git
+    components: [uart_p2p_transmitter, uart_p2p_receiver]
+
+esp32:
+  board: esp32dev
+  framework:
+    type: arduino
+
+logger:
+
+uart:
+  id: uart_1
+  tx_pin: GPIO17
+  rx_pin: GPIO16
+  baud_rate: 115200
+
+sensor:
+  - platform: template
+    name: "Random Numbers"
+    id: random_sensor_1
+    unit_of_measurement: "%"
+    lambda: |-
+      return rand() % 100;
+    update_interval: 10s
+
+switch:
+  - platform: template
+    id: test_input_switch
+    name: "Template Switch"
+    optimistic: true
+
+binary_sensor:
+  - platform: template
+    id: binary_sensor_1
+    lambda: return id(test_input_switch).state;
+
+text_sensor:
+  - platform: template
+    id: text_sensor_1
+    name: "Template Text Sensor"
+    update_interval: 10s
+    lambda: |-
+        if (id(random_sensor_1).state > 50) {
+          return {"My random number changed to above 50%"};
+        } else {
+          return {"My random number changed to lower or equal 50%"};
+        }
+      
+
+uart_p2p_transmitter:
+  uart_id: uart_1
+  sensors:
+    - sensor_id: random_sensor_1
+      address: 0x01
+  binary_sensors:
+    - sensor_id: binary_sensor_1
+      address: 0x02
+  text_sensors:
+    - sensor_id: text_sensor_1
+      address: 0x03
+
+uart_p2p_receiver:
+  uart_id: uart_1
+  sensors:
+    - id: receiver_sensor_1
+      name: "Sensor address 0x01"
+      unit_of_measurement: "%"
+      address: 0x01
+  binary_sensors:
+    - id: receiver_binary_sensor_1
+      name: "Binary sensor address 0x02"
+      address: 0x02
+  text_sensors:
+    - id: receiver_text_sensor_1
+      name: "Text sensor address 0x03"
+      address: 0x03
