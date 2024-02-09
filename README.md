@@ -118,6 +118,10 @@ uart_p2p_receiver:
 
 [Here](esp32-receiver-sample.yaml "ESP32 Receiver") you can find a full sample for the receiver.
 
+## More samples
+
+- [Arduino -> Esphome](arduino/ESP32_ARDUINO.md)
+
 ## Known issues
 
 None.
