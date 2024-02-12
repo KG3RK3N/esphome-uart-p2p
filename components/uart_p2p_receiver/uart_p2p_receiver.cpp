@@ -19,12 +19,15 @@ void UartP2pReceiver::add_text_sensor(text_sensor::TextSensor *text_sensor, uint
 }
 
 void UartP2pReceiver::loop() {
-  // Implement any additional loop logic if needed
   if (this->available() > headerSize) {
-    int length = this->available();
-    uint8_t buffer[length];
-    this->read_array(buffer, length);
-    this->handle_uart_data(buffer, length);
+    uint8_t headerBuffer[headerSize];
+    this->read_array(headerBuffer, headerSize);
+    uint8_t messageSize = headerBuffer[2];
+
+    if (this->available() >= messageSize + 1) {  // +1 for checksum
+      this->read_array(headerBuffer + headerSize, messageSize + 1);
+      this->handle_uart_data(headerBuffer, headerSize + messageSize + 1);
+    }
   }
 }
 
