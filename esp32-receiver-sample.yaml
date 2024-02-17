@@ -1,6 +1,6 @@
 external_components:
   - source:
-      url: github://KG3RK3N/esphome-uart-p2p
+      url: https://github.com/KG3RK3N/esphome-uart-p2p
       type: git
     components: [uart_p2p_receiver]
 
@@ -23,6 +23,7 @@ uart_p2p_receiver:
     - id: random_sensor_1
       name: "Sensor address 0x01"
       unit_of_measurement: "%"
+      accuracy_decimals: 2
       address: 0x01
   binary_sensors:
     - id: binary_sensor_1

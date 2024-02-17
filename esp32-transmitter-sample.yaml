@@ -1,6 +1,6 @@
 external_components:
   - source:
-      url: github://KG3RK3N/esphome-uart-p2p
+      url: https://github.com/KG3RK3N/esphome-uart-p2p
       type: git
     components: [uart_p2p_transmitter]
 
@@ -50,7 +50,7 @@ text_sensor:
         }
 
 uart_p2p_transmitter:
-  uart: uart_1
+  uart_id: uart_1
   sensors:
     - sensor_id: random_sensor_1
       address: 0x01

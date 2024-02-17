@@ -49,7 +49,7 @@ This component send the data to another devices.
 ```yaml
 external_components:
   - source:
-      url: github://KG3RK3N/esphome-uart-p2p
+      url: https://github.com/KG3RK3N/esphome-uart-p2p
       type: git
     components: [uart_p2p_transmitter]
 ```
@@ -59,7 +59,7 @@ This component receive data from a device with a transmitter.
 ```yaml
 external_components:
   - source:
-      url: github://KG3RK3N/esphome-uart-p2p
+      url: https://github.com/KG3RK3N/esphome-uart-p2p
       type: git
     components: [uart_p2p_receiver]
 ```
